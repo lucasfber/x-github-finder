@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react"
+import "./App.css"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Navbar from "./components/Navbar"
+import Spinner from "./components/Spinner"
+import Search from "./components/Search"
+import Users from "./container/Users"
+
+class App extends React.Component {
+  state = {
+    users: [],
+    loading: false
+  }
+
+  searchUsers = async text => {
+    this.setState({ loading: true })
+
+    const result = await fetch(
+      `https://api.github.com/search/users?q=${text}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    )
+    const data = await result.json()
+
+    this.setState({ users: data.items, loading: false })
+  }
+
+  render() {
+    const { loading, users } = this.state
+    return (
+      <div className="App">
+        <Navbar />
+        <div className="container">
+          <Search searchUsers={this.searchUsers} />
+          {loading && <Spinner />}
+          <Users users={users} />
+        </div>
+      </div>
+    )
+  }
 }
 
-export default App;
+export default App

@@ -1,0 +1,15 @@
+1. <React.Fragment></React.Fragment> é equivalente a <></>
+
+2. Utilizando o fetch de dados de forma sincrona com async/await (componentDidMount)
+
+3. Importar imagens no React com import 'myImage' from '.myImage.jpg/. Isso é possivel
+  graças ao webpack
+
+4. Components de Formulario guardam seu estado. Nao é necessário subir o estado pra um 
+componente de nível mais alto (App)
+
+5. Tratando onChange em vários inputs:
+  this.setState({
+    [e.target.name]: e.target.value
+  })
+

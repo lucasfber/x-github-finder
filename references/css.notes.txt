@@ -1,0 +1,8 @@
+1 - Search for 'font-awesome xx.xx.xx cdn' 
+
+2 - Grid
+  display: grid
+  gtc: repeat(3, 1fr)
+  gg: 16px
+
+  Is only it?

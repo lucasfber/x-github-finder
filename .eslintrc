@@ -1,0 +1,12 @@
+{
+  "extends": ["pagarme-react"],
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "quotes": ["error", "double"],
+    "space-before-function-paren": "off",
+    "comma-dangle": "off",
+    "import/no-extraneous-dependencies": "off"
+  }
+}
