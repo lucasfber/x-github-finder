@@ -13,3 +13,13 @@ componente de nível mais alto (App)
     [e.target.name]: e.target.value
   })
 
+6. Alert desaparecer depois de um tempo
+  chamar o setState() dentro de um setTimeout de 2s
+  dentro do proprio setMessage
+
+7. Testando se a props já vem false, e evitar erro de renderizaçao
+  alert !== null && (
+      <div className={`alert alert-${alert.type}`}>
+        <i className="fas fa-info-circle" /> {alert.message}
+      </div>
+    )

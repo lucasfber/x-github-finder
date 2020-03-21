@@ -10,14 +10,19 @@ class Search extends React.Component {
 
   onSubmit = e => {
     e.preventDefault()
-    this.props.searchUsers(this.state.text)
-    this.setState({
-      text: ""
-    })
+    if (this.state.text === "") {
+      this.props.setMessage("Please enter something", "light")
+    } else {
+      this.props.searchUsers(this.state.text)
+      this.setState({
+        text: ""
+      })
+    }
   }
 
   render() {
     const { text } = this.state
+    const { clearUsers, hasUsers } = this.props
     return (
       <div>
         <form className="form" onSubmit={this.onSubmit}>
@@ -34,13 +39,20 @@ class Search extends React.Component {
             value="Search"
           />
         </form>
+        {hasUsers && (
+          <button className="btn btn-light btn-block" onClick={clearUsers}>
+            Clear
+          </button>
+        )}
       </div>
     )
   }
 }
 
 Search.propTypes = {
-  searchUsers: PropTypes.func.isRequired
+  searchUsers: PropTypes.func.isRequired,
+  clearUsers: PropTypes.func.isRequired,
+  hasUsers: PropTypes.bool.isRequired
 }
 
 export default Search
