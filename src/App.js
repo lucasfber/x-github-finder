@@ -8,12 +8,15 @@ import Search from "./components/Search"
 import Alert from "./components/Alert"
 import Users from "./container/Users"
 import About from "./pages/About"
+import User from "./pages/User"
 
 class App extends React.Component {
   state = {
     users: [],
     loading: false,
-    alert: null
+    alert: null,
+    user: {},
+    repos: []
   }
 
   searchUsers = async text => {
@@ -40,8 +43,28 @@ class App extends React.Component {
     setTimeout(() => this.setState({ alert: null }), 2000)
   }
 
+  getUser = async username => {
+    this.setState({ loading: true })
+    const result = await fetch(
+      `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    )
+    const data = await result.json()
+    console.log("getUser()")
+    this.setState({ user: data, loading: false })
+  }
+
+  getUserRepos = async username => {
+    this.setState({ loading: true })
+    const result = await fetch(
+      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    )
+    const data = await result.json()
+    console.log("getUserRepos()", data)
+    this.setState({ repos: data, loading: false })
+  }
+
   render() {
-    const { loading, users, alert } = this.state
+    const { loading, users, user, alert, repos } = this.state
     return (
       <Router>
         <div className="App">
@@ -66,6 +89,20 @@ class App extends React.Component {
                 )}
               />
               <Route exact path="/about" component={About} />
+              <Route
+                exact
+                path="/user/:login"
+                render={props => (
+                  <User
+                    {...props}
+                    user={user}
+                    loading={loading}
+                    getUserRepos={this.getUserRepos}
+                    getUser={this.getUser}
+                    repos={repos}
+                  />
+                )}
+              />
             </Switch>
           </div>
         </div>

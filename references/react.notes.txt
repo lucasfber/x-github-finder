@@ -8,7 +8,7 @@
 4. Components de Formulario guardam seu estado. Nao é necessário subir o estado pra um 
 componente de nível mais alto (App)
 
-5. Tratando onChange em vários inputs:
+5. Tratando onChange de vários inputs:
   this.setState({
     [e.target.name]: e.target.value
   })
@@ -23,3 +23,20 @@ componente de nível mais alto (App)
         <i className="fas fa-info-circle" /> {alert.message}
       </div>
     )
+
+8. Erro quando tentava renderizar user.name, na primeira chamada de render().
+  [NOTE!] NUNCA ATRIBUIR NULL A ALGO QUE IRÁ RENDERIZAR BASEADO NUMA REQUISIÇÃO HTTP
+    
+    No 1º render() antes do componentDidMount(), o erro era pq nao tinha criado
+    a propriedade user no state. Nisso ele tentava renderizar e dava undefined;
+      * A 1º solução foi fazer um render condicional igual ao SearchBar, funcionou;
+
+      * A 2º solução (RECOMENDADA) foi só criar a propriedade 'user' no state, e 'ATRIBUIR UM OBJETO VAZIO A ELA'. Feito isso, a renderização condicional nao é mais necessária
+
+  
+
+9. Ciclo de vida do componente
+  1º render() 
+  2º componentDidMount()
+    * Como geralmente fazemos requisições HTTP nesse método, e chamamos o setState()
+    logo o render() será chamado novamente, agora com os dados prontos a serem renderizados.
