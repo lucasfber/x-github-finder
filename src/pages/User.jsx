@@ -55,7 +55,7 @@ class User extends React.Component {
               style={{ width: "150px" }}
             />
             <h1>{name}</h1>
-            <p>Location: {location}</p>
+            {location && <p>Location: {location}</p>}
           </div>
           <div>
             {bio && (
