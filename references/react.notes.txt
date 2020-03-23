@@ -40,3 +40,11 @@ componente de nível mais alto (App)
   2º componentDidMount()
     * Como geralmente fazemos requisições HTTP nesse método, e chamamos o setState()
     logo o render() será chamado novamente, agora com os dados prontos a serem renderizados.
+
+
+10. Primeiro contato hook useState
+
+const [text, setText] = useState('') <- valor inicial
+
+setText() <- writing
+text <- reading
