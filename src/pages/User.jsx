@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
 
@@ -6,12 +6,11 @@ import Spinner from "../components/Spinner"
 import Repos from "../components/Repos"
 
 const User = ({ getUser, match, getUserRepos, loading, repos, user }) => {
-  componentDidMount() {
-    console.log("cdM")
-
+  useEffect(() => {
     getUser(match.params.login)
     getUserRepos(match.params.login)
-  }
+    /* eslint-disable-next-line */
+  }, [])
 
   const {
     name,
@@ -92,9 +91,7 @@ const User = ({ getUser, match, getUserRepos, loading, repos, user }) => {
       <div className="card text-center">
         <span className="badge badge-primary">Followers: {followers}</span>
         <span className="badge badge-success">Following: {following}</span>
-        <span className="badge badge-light">
-          Public Repos: {public_repos}
-        </span>
+        <span className="badge badge-light">Public Repos: {public_repos}</span>
         <span className="badge badge-dark">Public Gists: {public_gists}</span>
       </div>
       <Repos repos={repos} />
@@ -108,7 +105,7 @@ User.propTypes = {
   loading: PropTypes.bool.isRequired,
   repos: PropTypes.array.isRequired,
   user: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired
 }
 
 export default User
