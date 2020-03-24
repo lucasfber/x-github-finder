@@ -74,3 +74,13 @@ text <- reading
 
    * Usar função com async dentro da callback do useEffect, 
      Nao passar uma callback com async!
+
+  12. Atualizando varios pedaços do state
+    setState:
+      this.setState({ users: data, loading: false})
+
+    with hooks:
+      setUsers(data)
+      setLoading(false)
+
+

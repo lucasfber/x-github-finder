@@ -10,6 +10,8 @@ import Users from "./container/Users"
 import About from "./pages/About"
 import User from "./pages/User"
 
+import GithubContext from "./context/github/GitHubState"
+
 const App = () => {
   const [alert, setAlert] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -67,47 +69,49 @@ const App = () => {
   }
 
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <div className="container">
-          <Alert alert={alert} />
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={props => (
-                <Fragment>
-                  <Search
-                    searchUsers={searchUsers}
-                    clearUsers={clearUsers}
-                    hasUsers={users.length > 0}
-                    setMessage={setMessage}
+    <GithubContext>
+      <Router>
+        <div className="App">
+          <Navbar />
+          <div className="container">
+            <Alert alert={alert} />
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={props => (
+                  <Fragment>
+                    <Search
+                      searchUsers={searchUsers}
+                      clearUsers={clearUsers}
+                      hasUsers={users.length > 0}
+                      setMessage={setMessage}
+                    />
+                    {loading && <Spinner />}
+                    <Users users={users} />
+                  </Fragment>
+                )}
+              />
+              <Route exact path="/about" component={About} />
+              <Route
+                exact
+                path="/user/:login"
+                render={props => (
+                  <User
+                    {...props}
+                    user={user}
+                    loading={loading}
+                    getUserRepos={getUserRepos}
+                    getUser={getUser}
+                    repos={repos}
                   />
-                  {loading && <Spinner />}
-                  <Users users={users} />
-                </Fragment>
-              )}
-            />
-            <Route exact path="/about" component={About} />
-            <Route
-              exact
-              path="/user/:login"
-              render={props => (
-                <User
-                  {...props}
-                  user={user}
-                  loading={loading}
-                  getUserRepos={getUserRepos}
-                  getUser={getUser}
-                  repos={repos}
-                />
-              )}
-            />
-          </Switch>
+                )}
+              />
+            </Switch>
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </GithubContext>
   )
 }
 
