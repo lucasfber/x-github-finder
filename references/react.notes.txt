@@ -13,8 +13,9 @@ componente de nível mais alto (App)
     [e.target.name]: e.target.value
   })
 
-6. Alert desaparecer depois de um tempo
-  chamar o setState() dentro de um setTimeout de 2s
+6. Alert desaparecer depois de um tempo:
+  chama o setState() pra mostrar o Alert
+  depois chama o setState() dentro de um setTimeout de 2s
   dentro do proprio setMessage
 
 7. Testando se a props já vem false, e evitar erro de renderizaçao
@@ -28,7 +29,7 @@ componente de nível mais alto (App)
   [NOTE!] NUNCA ATRIBUIR NULL A ALGO QUE IRÁ RENDERIZAR BASEADO NUMA REQUISIÇÃO HTTP
     
     No 1º render() antes do componentDidMount(), o erro era pq nao tinha criado
-    a propriedade user no state. Nisso ele tentava renderizar e dava undefined;
+    a propriedade 'user' no state. Nisso, ele tentava renderizar e dava undefined;
       * A 1º solução foi fazer um render condicional igual ao SearchBar, funcionou;
 
       * A 2º solução (RECOMENDADA) foi só criar a propriedade 'user' no state, e 'ATRIBUIR UM OBJETO VAZIO A ELA'. Feito isso, a renderização condicional nao é mais necessária
@@ -46,5 +47,30 @@ componente de nível mais alto (App)
 
 const [text, setText] = useState('') <- valor inicial
 
-setText() <- writing
+setText('someValue') <- writing
 text <- reading
+
+11. useEffect hook
+
+  useEffect(() => {
+      getUser(match.params.login)
+      getUserRepos(match.params.login)
+      /* eslint-disable-next-line */ <- anula o warning do array vazio
+    }, [])
+
+  com o [] vazio só vai executar uma vez, imitando o componentDidMount
+
+  Se caso eu passasse algo pro array por exemplo. ['user']
+  toda vez que 'user' fosse alterado, esse hook iria ser executado
+
+  pra requisições http, é uma boa pratica passar o [], caso contrário temos 
+  um loop infinito, de requisição e atualização de dados
+
+  referencias:
+    https://overreacted.io/pt-br/a-complete-guide-to-useeffect/
+    https://www.robinwieruch.de/react-hooks-fetch-data
+
+   * o Effect Hook executa toda vez que o componente monta ou atualiza
+
+   * Usar função com async dentro da callback do useEffect, 
+     Nao passar uma callback com async!
