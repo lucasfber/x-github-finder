@@ -10,7 +10,7 @@ import Users from "./container/Users"
 import About from "./pages/About"
 import User from "./pages/User"
 
-import GithubContext from "./context/github/GitHubState"
+import GithubContext from "./context/github/GithubState"
 
 const App = () => {
   const [alert, setAlert] = useState(null)
@@ -82,7 +82,6 @@ const App = () => {
                 render={props => (
                   <Fragment>
                     <Search
-                      searchUsers={searchUsers}
                       clearUsers={clearUsers}
                       hasUsers={users.length > 0}
                       setMessage={setMessage}
