@@ -7,9 +7,7 @@ import {
   SEARCH_USERS,
   GET_USER,
   CLEAR_USERS,
-  GET_REPOS,
-  SET_ALERT,
-  REMOVE_ALERT
+  GET_REPOS
 } from "../types.js"
 
 const GithubState = props => {
@@ -60,12 +58,6 @@ const GithubState = props => {
 
   const setLoading = () => dispatch({ type: SET_LOADING })
 
-  const setMessage = (message, type) => {
-    dispatch({ type: SET_ALERT, payload: { message, type } })
-
-    setTimeout(() => dispatch({ type: REMOVE_ALERT }), 2000)
-  }
-
   const clearUsers = () => {
     dispatch({ type: CLEAR_USERS })
   }
@@ -77,12 +69,10 @@ const GithubState = props => {
         repos: state.repos,
         user: state.user,
         users: state.users,
-        alert: state.alert,
         searchUsers,
         getUser,
         clearUsers,
-        getUserRepos,
-        setMessage
+        getUserRepos
       }}
     >
       {props.children}

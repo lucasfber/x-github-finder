@@ -11,37 +11,36 @@ import About from "./pages/About"
 import User from "./pages/User"
 
 import GithubContext from "./context/github/GithubState"
+import AlertContext from "./context/alert/AlertState"
 
 const App = () => {
   return (
     <GithubContext>
-      <Router>
-        <div className="App">
-          <Navbar />
-          <div className="container">
-            <Alert />
-            <Switch>
-              <Route
-                exact
-                path="/"
-                render={props => (
-                  <Fragment>
-                    <Search />
-                    <Spinner />
-                    <Users />
-                  </Fragment>
-                )}
-              />
-              <Route exact path="/about" component={About} />
-              <Route
-                exact
-                path="/user/:login"
-                render={props => <User {...props} />}
-              />
-            </Switch>
+      <AlertContext>
+        <Router>
+          <div className="App">
+            <Navbar />
+            <div className="container">
+              <Alert />
+              <Switch>
+                <Route
+                  exact
+                  path="/"
+                  render={props => (
+                    <Fragment>
+                      <Search />
+                      <Spinner />
+                      <Users />
+                    </Fragment>
+                  )}
+                />
+                <Route exact path="/about" component={About} />
+                <Route exact path="/user/:login" component={User} />
+              </Switch>
+            </div>
           </div>
-        </div>
-      </Router>
+        </Router>
+      </AlertContext>
     </GithubContext>
   )
 }

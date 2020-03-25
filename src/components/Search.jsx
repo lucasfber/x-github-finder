@@ -1,13 +1,16 @@
 import React, { useState, useContext } from "react"
-import PropTypes from "prop-types"
 
 import GithubContext from "../context/github/githubContext.js"
+import AlertContext from "../context/alert/alertContext"
 
 const Search = () => {
   const [text, setText] = useState("")
 
   const githubContext = useContext(GithubContext)
-  const { searchUsers, clearUsers, users, setMessage } = githubContext
+  const alertContext = useContext(AlertContext)
+
+  const { searchUsers, clearUsers, users } = githubContext
+  const { setMessage } = alertContext
 
   const onChange = e => setText(e.target.value)
 

@@ -1,10 +1,10 @@
 import React, { useContext } from "react"
-import GitHubContext from "../context/github/githubContext"
+import AlertContext from "../context/alert/alertContext"
 
 const Alert = () => {
-  const githubContext = useContext(GitHubContext)
+  const alertContext = useContext(AlertContext)
 
-  const { alert } = githubContext
+  const { alert } = alertContext
 
   return (
     alert !== null && (
