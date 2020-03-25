@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from "react"
+import React, { Fragment } from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import "./App.css"
 
@@ -13,30 +13,21 @@ import User from "./pages/User"
 import GithubContext from "./context/github/GithubState"
 
 const App = () => {
-  const [alert, setAlert] = useState(null)
-  const [loading, setLoading] = useState(false)
-
-  const setMessage = (message, type) => {
-    setAlert({ message, type })
-
-    setTimeout(() => setAlert(null), 2000)
-  }
-
   return (
     <GithubContext>
       <Router>
         <div className="App">
           <Navbar />
           <div className="container">
-            <Alert alert={alert} />
+            <Alert />
             <Switch>
               <Route
                 exact
                 path="/"
                 render={props => (
                   <Fragment>
-                    <Search setMessage={setMessage} />
-                    {loading && <Spinner />}
+                    <Search />
+                    <Spinner />
                     <Users />
                   </Fragment>
                 )}
@@ -45,7 +36,7 @@ const App = () => {
               <Route
                 exact
                 path="/user/:login"
-                render={props => <User {...props} loading={loading} />}
+                render={props => <User {...props} />}
               />
             </Switch>
           </div>

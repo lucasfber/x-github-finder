@@ -6,7 +6,7 @@ import Spinner from "../components/Spinner"
 import Repos from "../components/Repos"
 import GithubContext from "../context/github/githubContext"
 
-const User = ({ match, loading, repos }) => {
+const User = ({ match }) => {
   const githubContext = useContext(GithubContext)
 
   const { getUser, user, getUserRepos } = githubContext
@@ -36,7 +36,7 @@ const User = ({ match, loading, repos }) => {
 
   return (
     <div>
-      {loading && <Spinner />}
+      <Spinner />
       <Link to="/" className="btn btn-light">
         Back To Search
       </Link>
@@ -100,15 +100,12 @@ const User = ({ match, loading, repos }) => {
         <span className="badge badge-light">Public Repos: {public_repos}</span>
         <span className="badge badge-dark">Public Gists: {public_gists}</span>
       </div>
-      <Repos repos={repos} />
+      <Repos />
     </div>
   )
 }
 
 User.propTypes = {
-  getUserRepos: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired
 }
 

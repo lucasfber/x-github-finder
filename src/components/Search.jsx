@@ -3,11 +3,11 @@ import PropTypes from "prop-types"
 
 import GithubContext from "../context/github/githubContext.js"
 
-const Search = ({ setMessage }) => {
+const Search = () => {
   const [text, setText] = useState("")
 
   const githubContext = useContext(GithubContext)
-  const { searchUsers, clearUsers, users } = githubContext
+  const { searchUsers, clearUsers, users, setMessage } = githubContext
 
   const onChange = e => setText(e.target.value)
 
@@ -44,10 +44,6 @@ const Search = ({ setMessage }) => {
       )}
     </div>
   )
-}
-
-Search.propTypes = {
-  setMessage: PropTypes.func.isRequired
 }
 
 export default Search

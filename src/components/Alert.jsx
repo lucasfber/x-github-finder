@@ -1,7 +1,11 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React, { useContext } from "react"
+import GitHubContext from "../context/github/githubContext"
 
-const Alert = ({ alert }) => {
+const Alert = () => {
+  const githubContext = useContext(GitHubContext)
+
+  const { alert } = githubContext
+
   return (
     alert !== null && (
       <div className={`alert alert-${alert.type}`}>
@@ -9,10 +13,6 @@ const Alert = ({ alert }) => {
       </div>
     )
   )
-}
-
-Alert.propTypes = {
-  alert: PropTypes.object.isRequired
 }
 
 export default Alert

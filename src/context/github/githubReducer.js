@@ -3,7 +3,9 @@ import {
   SET_LOADING,
   SEARCH_USERS,
   CLEAR_USERS,
-  GET_REPOS
+  GET_REPOS,
+  SET_ALERT,
+  REMOVE_ALERT
 } from "../types.js"
 
 export default (state, action) => {
@@ -18,7 +20,6 @@ export default (state, action) => {
       }
 
     case SEARCH_USERS:
-      console.log(action, "ACTION")
       return {
         ...state,
         users: action.payload,
@@ -26,7 +27,6 @@ export default (state, action) => {
       }
 
     case GET_USER:
-      console.log(action, "ACTION")
       return {
         ...state,
         user: action.payload,
@@ -45,6 +45,21 @@ export default (state, action) => {
         ...state,
         repos: action.payload,
         loading: false
+      }
+
+    case SET_ALERT:
+      return {
+        ...state,
+        alert: {
+          type: action.payload.type,
+          message: action.payload.message
+        }
+      }
+
+    case REMOVE_ALERT:
+      return {
+        ...state,
+        alert: null
       }
   }
 }
