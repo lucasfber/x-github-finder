@@ -3,10 +3,11 @@ import PropTypes from "prop-types"
 
 import GithubContext from "../context/github/githubContext.js"
 
-const Search = ({ clearUsers, hasUsers, setMessage }) => {
+const Search = ({ setMessage }) => {
   const [text, setText] = useState("")
 
   const githubContext = useContext(GithubContext)
+  const { searchUsers, clearUsers, users } = githubContext
 
   const onChange = e => setText(e.target.value)
 
@@ -15,7 +16,7 @@ const Search = ({ clearUsers, hasUsers, setMessage }) => {
     if (text === "") {
       setMessage("Please enter something", "light")
     } else {
-      githubContext.searchUsers(text)
+      searchUsers(text)
       setText("")
     }
   }
@@ -36,7 +37,7 @@ const Search = ({ clearUsers, hasUsers, setMessage }) => {
           value="Search"
         />
       </form>
-      {hasUsers && (
+      {users.length > 0 && (
         <button className="btn btn-light btn-block" onClick={clearUsers}>
           Clear
         </button>
@@ -46,8 +47,6 @@ const Search = ({ clearUsers, hasUsers, setMessage }) => {
 }
 
 Search.propTypes = {
-  clearUsers: PropTypes.func.isRequired,
-  hasUsers: PropTypes.bool.isRequired,
   setMessage: PropTypes.func.isRequired
 }
 

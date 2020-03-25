@@ -3,11 +3,11 @@ import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 
 export default function UserItem({ user }) {
-  const { avatarUrl, login } = user
+  const { avatar_url, login } = user
   return (
     <div className="card text-center">
       <img
-        src={avatarUrl}
+        src={avatar_url}
         alt=""
         className="round-img"
         style={{ width: "60px" }}
@@ -23,7 +23,7 @@ export default function UserItem({ user }) {
 
 UserItem.propTypes = {
   user: PropTypes.shape({
-    avatarUrl: PropTypes.string,
+    avatar_url: PropTypes.string,
     id: PropTypes.number,
     login: PropTypes.string
   }).isRequired

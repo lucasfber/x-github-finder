@@ -1,8 +1,12 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React, { useContext } from "react"
 import UserItem from "../components/UserItem"
+import GithubContext from "../context/github/githubContext"
 
-function Users({ users }) {
+const Users = () => {
+  const githubContext = useContext(GithubContext)
+
+  const { users } = githubContext
+
   return (
     <div className="users-grid">
       {users.map(user => (
@@ -10,10 +14,6 @@ function Users({ users }) {
       ))}
     </div>
   )
-}
-
-Users.propTypes = {
-  users: PropTypes.array.isRequired
 }
 
 export default Users
