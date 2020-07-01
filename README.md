@@ -1,3 +1,22 @@
+## Description:
+
+Aplicação desenvolvida no curso [React Front to Back](https://www.udemy.com/course/modern-react-front-to-back/) usando React Hooks, Context API, React Router
+
+### Built with:
+
+- React (Hooks)
+- Context API
+- React Router
+- Web Design Responsivo
+
+## Demo:
+
+![Demo gif](demo.gif)
+
+## Live version:
+
+https://xgithubfinder989.netlify.app/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -66,3 +85,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
